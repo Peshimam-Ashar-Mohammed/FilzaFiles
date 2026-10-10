@@ -60,23 +60,39 @@ public final class FilzaFiles {
         );
     }
 
+
     public static void copy(String source, String destination)
             throws IOException {
+        Path sourcePath = Path.of(source);
+        Path destinationPath = Path.of(destination);
+
+        if (destinationPath.getParent() != null) {
+            Files.createDirectories(destinationPath.getParent());
+        }
+
         Files.copy(
-                Path.of(source),
-                Path.of(destination),
+                sourcePath,
+                destinationPath,
                 StandardCopyOption.REPLACE_EXISTING
         );
     }
 
     public static void move(String source, String destination)
             throws IOException {
+        Path sourcePath = Path.of(source);
+        Path destinationPath = Path.of(destination);
+
+        if (destinationPath.getParent() != null) {
+            Files.createDirectories(destinationPath.getParent());
+        }
+
         Files.move(
-                Path.of(source),
-                Path.of(destination),
+                sourcePath,
+                destinationPath,
                 StandardCopyOption.REPLACE_EXISTING
         );
     }
+
 
     public static void delete(String path) throws IOException {
         Files.delete(Path.of(path));

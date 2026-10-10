@@ -239,6 +239,19 @@ class FilzaFilesTest {
     }
 
 
+    
+    @Test
+    void copiesFileIntoMissingDirectories() throws Exception {
+        Path source = tempDir.resolve("source.txt");
+        Path destination = tempDir.resolve("backups/2026/copy.txt");
+
+        FilzaFiles.write(source.toString(), "Backup data");
+        FilzaFiles.copy(source.toString(), destination.toString());
+
+        assertTrue(Files.exists(destination));
+        assertEquals("Backup data", FilzaFiles.read(destination.toString()));
+    }
+
 
 
 
