@@ -199,6 +199,46 @@ class FilzaFilesTest {
     }
 
 
+    
+    @Test
+    void copiesFileCorrectly() throws Exception {
+        Path source = tempDir.resolve("source.txt");
+        Path destination = tempDir.resolve("copy.txt");
+
+        FilzaFiles.write(source.toString(), "FilzaFiles");
+
+        FilzaFiles.copy(source.toString(), destination.toString());
+
+        assertTrue(FilzaFiles.exists(destination.toString()));
+        assertEquals("FilzaFiles", FilzaFiles.read(destination.toString()));
+        assertTrue(FilzaFiles.exists(source.toString()));
+    }
+
+    @Test
+    void movesFileCorrectly() throws Exception {
+        Path source = tempDir.resolve("source.txt");
+        Path destination = tempDir.resolve("moved.txt");
+
+        FilzaFiles.write(source.toString(), "Move me");
+
+        FilzaFiles.move(source.toString(), destination.toString());
+
+        assertFalse(FilzaFiles.exists(source.toString()));
+        assertTrue(FilzaFiles.exists(destination.toString()));
+        assertEquals("Move me", FilzaFiles.read(destination.toString()));
+    }
+
+    @Test
+    void deletesFileCorrectly() throws Exception {
+        Path file = tempDir.resolve("delete-me.txt");
+        FilzaFiles.write(file.toString(), "Temporary");
+
+        FilzaFiles.delete(file.toString());
+
+        assertFalse(FilzaFiles.exists(file.toString()));
+    }
+
+
 
 
 
