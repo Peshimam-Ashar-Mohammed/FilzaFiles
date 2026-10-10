@@ -436,6 +436,25 @@ mvn package
 
 The generated artifact is placed in `target/`.
 
+### Integration test results
+
+The separate `FilzaFilesDemo` Maven application completed an integration run on Windows with **22 tests passed and 0 failed**.
+
+The integration suite exercised:
+
+- File creation, existence checks, reading, writing, and appending
+- Nested directory creation and Unicode text handling
+- Word, character, line, paragraph, and sentence counting
+- Text replacement in memory and in files
+- Copying and moving files, including nested destinations
+- File deletion and backup creation
+- File metadata inspection
+- Recursive filename and extension searches
+- Empty-file handling and overwrite behavior
+
+These results represent the tested operations in the current Windows environment. They are not a guarantee of exhaustive edge-case or cross-platform coverage.
+
+
 ## Project Status
 
 FilzaFiles is an early-stage Java library. The initial release focuses on common file operations, recursive searching, metadata, and basic text analysis.
