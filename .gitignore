@@ -1,0 +1,6 @@
+(
+echo filzafiles/target/
+echo .idea/
+echo *.iml
+echo .vscode/
+) > .gitignore
