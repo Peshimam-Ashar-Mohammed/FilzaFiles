@@ -6,7 +6,7 @@
 
     <groupId>io.github.ashar</groupId>
     <artifactId>filzafiles</artifactId>
-    <version>0.1.0-SNAPSHOT</version>
+    <version>0.1.0</version>
 
     <name>FilzaFiles</name>
     <description>A lightweight Java library for file operations and text processing.</description>
