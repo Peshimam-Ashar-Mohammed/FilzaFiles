@@ -81,5 +81,23 @@ public final class FilzaFiles {
     public static void delete(String path) throws IOException {
         Files.delete(Path.of(path));
     }
+
+
+    
+    public static Path backup(String source) throws IOException {
+        Path original = Path.of(source);
+
+        if (!Files.isRegularFile(original)) {
+            throw new IOException("Not a regular file: " + original);
+        }
+
+        Path backup = original.resolveSibling(
+                original.getFileName().toString() + ".bak"
+        );
+
+        return Files.copy(original, backup);
+    }
+
+
 }
     

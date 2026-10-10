@@ -177,6 +177,27 @@ class FilzaFilesTest {
         assertEquals(0, TextTools.sentenceCount("   "));
     }
 
+    
+    @Test
+    void createsBackupWithoutOverwritingExistingBackup()
+            throws Exception {
+        Path original = tempDir.resolve("notes.txt");
+        FilzaFiles.write(original.toString(), "Original content");
+
+        Path backup = FilzaFiles.backup(original.toString());
+
+        assertEquals("Original content", FilzaFiles.read(backup.toString()));
+
+        FilzaFiles.write(original.toString(), "Updated content");
+
+        assertEquals("Original content", FilzaFiles.read(backup.toString()));
+
+        assertThrows(
+                java.nio.file.FileAlreadyExistsException.class,
+                () -> FilzaFiles.backup(original.toString())
+        );
+    }
+
 
 
 
