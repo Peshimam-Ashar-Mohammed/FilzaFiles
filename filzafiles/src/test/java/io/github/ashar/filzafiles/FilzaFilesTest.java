@@ -6,6 +6,8 @@ import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -135,6 +137,33 @@ class FilzaFilesTest {
         assertEquals("Main.java",
                 results.get(0).getFileName().toString());
     }
+
+
+    
+    @Test
+    void inspectsFileMetadata() throws Exception {
+        Path file = tempDir.resolve("report.txt");
+        FilzaFiles.write(file.toString(), "Hello");
+
+        FileInfo info = FileInfo.inspect(file.toString());
+
+        assertEquals("report.txt", info.getName());
+        assertEquals("txt", info.getExtension());
+        assertEquals(5, info.getSize());
+        assertNotNull(info.getLastModified());
+    }
+
+    @Test
+    void rejectsDirectoriesAsFiles() throws Exception {
+        Path directory = tempDir.resolve("folder");
+        Files.createDirectories(directory);
+
+        assertThrows(
+                java.io.IOException.class,
+                () -> FileInfo.inspect(directory.toString())
+        );
+    }
+
 
 
 
