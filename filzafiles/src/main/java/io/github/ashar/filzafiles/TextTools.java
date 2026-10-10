@@ -77,4 +77,32 @@ public final class TextTools {
                 replaceAll(content, target, replacement)
         );
     }
+
+        
+    public static long sentenceCount(String text) {
+        if (text == null || text.isBlank()) {
+            return 0;
+        }
+
+        java.util.regex.Matcher matcher =
+                java.util.regex.Pattern
+                        .compile("[.!?]+(?=\\s|$)")
+                        .matcher(text);
+
+        long count = 0;
+
+        while (matcher.find()) {
+            count++;
+        }
+
+        return count;
+    }
+
+    public static long sentenceCountFile(String path)
+            throws IOException {
+        return sentenceCount(FilzaFiles.read(path));
+    }
+
+
+
 }

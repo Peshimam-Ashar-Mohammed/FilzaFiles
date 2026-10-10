@@ -164,6 +164,20 @@ class FilzaFilesTest {
         );
     }
 
+        
+    @Test
+    void countsSentencesCorrectly() {
+        assertEquals(
+                3,
+                TextTools.sentenceCount(
+                        "Hello! How are you? I am fine."
+                )
+        );
+
+        assertEquals(0, TextTools.sentenceCount("   "));
+    }
+
+
 
 
 
